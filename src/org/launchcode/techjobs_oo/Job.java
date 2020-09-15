@@ -33,12 +33,6 @@ public class Job {
     @Override
     public String toString() {
 
-        String stringName = name;
-        String stringEmployer = employer.getValue();
-        String stringLocation = location.getValue();
-        String stringPositionType = positionType.getValue();
-        String stringCoreCompetency = coreCompetency.getValue();
-
         HashMap<String, String> strings = new HashMap<>();
         strings.put("name", name);
         strings.put("employer", employer.getValue());
