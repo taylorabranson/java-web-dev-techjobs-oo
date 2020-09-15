@@ -10,7 +10,6 @@ public abstract class JobField {
     private static int nextId = 1;
     private String value;
 
-
     // Constructors:
 
     public JobField() {
