@@ -10,11 +10,15 @@ public class JobTest {
 
     Job job1;
     Job job2;
+    Job job3;
+    Job job4;
 
     @Before
     public void createJobObjects() {
         job1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         job2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        job3 = new Job("", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        job4 = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
     }
 
     @Test
@@ -41,9 +45,44 @@ public class JobTest {
     }
 
     @Test
-    public void testBlankLineAtStartAndEndOfToString() {
+    public void testToStringBlankLineAtStartAndEnd() {
         assertTrue(job1.toString().startsWith("\n"));
         assertTrue(job1.toString().endsWith("\n"));
-
     }
+
+    @Test
+    public void testToStringReturnsMatchingLabelAndFieldOnEachLine() {
+        int id = job1.getId();
+        String test =
+                "\nID: " + id +
+                "\nName: Product tester" +
+                "\nEmployer: ACME" +
+                "\nLocation: Desert" +
+                "\nPosition Type: Quality control" +
+                "\nCore Competency: Persistence" +
+                "\n";
+        assertEquals(test, job1.toString());
+    }
+
+    @Test
+    public void testToStringReturnsDataNotAvailableForEmptyField() {
+        int id = job3.getId();
+        String test =
+                "\nID: " + id +
+                "\nName: Data not available" +
+                "\nEmployer: ACME" +
+                "\nLocation: Desert" +
+                "\nPosition Type: Quality control" +
+                "\nCore Competency: Persistence" +
+                "\n";
+        assertEquals(test, job3.toString());
+    }
+
+    @Test
+    public void testToStringReturnsJobDoesNotExistForJobWithEmptyFields() {
+        int id = job4.getId();
+        String test = "OOPS! This job does not seem to exist.";
+        assertEquals(test, job4.toString());
+    }
+
 }
